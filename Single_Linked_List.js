@@ -40,6 +40,8 @@ class SingleLinkedList {
       this.head.next = newNode
       this.tail = newNode
     //add additional 3rd+ Node to Single Linked List
+    //we can ignore the head, and just add additional nodes
+    //to the tail of the linked list
     } else {
       this.tail.next = newNode
       this.tail = newNode
@@ -57,3 +59,49 @@ newList.addNode(4)
 newList.addNode(5)
 
 console.log(newList)
+
+
+
+
+
+
+
+
+
+//REFACTORED AND STREAMLINED
+// first Node
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+// //a Single Linked List has a head, tail, and length properties
+// class SingleLinkedList {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//     this.length = 0;
+//   }
+//   addNode(val) {
+//     const newNode = new Node(val)
+
+//     //add 1st Node to Single Linked List
+//     if (this.head === null) {
+//       this.head = newNode;
+//     //add 2nd Node to Single Linked List
+//     } else if (this.head.next === null) {
+//       this.head.next = newNode
+//     //add additional 3rd+ Node to Single Linked List
+//     //we can ignore the head, and just add additional nodes
+//     //to the tail of the linked list
+//     } else {
+//       this.tail.next = newNode
+//     }
+//     //we always add nodes to the end/ tail of the Single Linked List
+//     this.tail = newNode;
+//     this.length++
+//   }
+// }
+
