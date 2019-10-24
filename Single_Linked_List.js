@@ -29,6 +29,7 @@ class SingleLinkedList {
     this.length = 0;
   }
 
+  //method that adds a node to the end of a linked list
   push(val) {
     const newNode = new Node(val);
 
@@ -59,32 +60,61 @@ class SingleLinkedList {
   //     currentNode = currentNode.next;
   //   }
 
+  //method that removes a node from the end of a linked list
   pop() {
     //if there are no nodes in the linked list, return undefined
-    if (this.head === null) return undefined
+    if (this.head === null) return undefined;
 
     let currentNode = this.head;
     let previousNode = null;
 
     //if there is only 1 node in the linked list, link list should be empty
     if (currentNode.next === null) {
-      this.head === null
-      this.tail === null
+      this.head === null;
+      this.tail === null;
 
-      return currentNode
+      return currentNode;
     }
 
     while (currentNode.next) {
-      previousNode = currentNode
-      currentNode = currentNode.next
+      previousNode = currentNode;
+      currentNode = currentNode.next;
     }
 
-    this.tail = previousNode
-    this.tail.next = null
-    this.length--
+    this.tail = previousNode;
+    this.tail.next = null;
+    this.length--;
 
     //return the removed Node
-    return currentNode
+    return currentNode;
+  }
+
+  //method that adds a node to the front of a linked list
+  unshift(val) {
+    const newNode = new Node(val);
+
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+
+    return this;
+  }
+
+  //method that removes a node from the front of a linked list
+  shift() {
+    if (this.head === null) return undefined;
+
+    const secondNode = this.head.next
+    const removedNode = this.head
+    this.head = secondNode
+    this.length--
+
+    return removedNode
   }
 }
 
@@ -95,11 +125,20 @@ newList.push(2)
 newList.push(3)
 newList.push(4)
 newList.push(5)
-// console.log(newList)
+// console.log(newList)     //expect 5 nodes(1, 2, 3, 4, 5)
 
 newList.pop()
 newList.pop();
-console.log(newList);
+// console.log(newList);    //expect 3 nodes(1, 2, 3)
+
+newList.unshift(5)
+newList.unshift(4)
+// console.log(newList)        //expect 5 nodes(4, 5, 1, 2, 3)
+
+newList.shift()
+console.log(newList);       //expect 4 nodes(5, 1, 2, 3)
+
+
 // newList.traverse()
 
 
