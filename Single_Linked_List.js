@@ -35,19 +35,17 @@ class SingleLinkedList {
     if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
-    //add 2nd Node to Single Linked List
-    } else if (this.head.next === null) {
-      this.head.next = newNode
-      this.tail = newNode
-    //add additional 3rd+ Node to Single Linked List
-    //we can ignore the head, and just add additional nodes
-    //to the tail of the linked list
+    //add additional nodes to Single Linked List
+    //we set the tail.next to the new node
+    //then update the tail to the new node
+    //the old tail becomes a middle node
     } else {
       this.tail.next = newNode
       this.tail = newNode
     }
 
     this.length++
+    return this
   }
 }
 
@@ -66,10 +64,8 @@ console.log(newList)
 
 
 
-
-
 //REFACTORED AND STREAMLINED
-// first Node
+//first Node
 // class Node {
 //   constructor(val) {
 //     this.val = val;
@@ -90,18 +86,26 @@ console.log(newList)
 //     //add 1st Node to Single Linked List
 //     if (this.head === null) {
 //       this.head = newNode;
-//     //add 2nd Node to Single Linked List
-//     } else if (this.head.next === null) {
-//       this.head.next = newNode
-//     //add additional 3rd+ Node to Single Linked List
-//     //we can ignore the head, and just add additional nodes
-//     //to the tail of the linked list
+//     //add additional nodes to Single Linked List
+//     //we set the tail.next to the new node
 //     } else {
 //       this.tail.next = newNode
 //     }
+//     //then update the tail to the new node
+//     //the old tail becomes a middle node
 //     //we always add nodes to the end/ tail of the Single Linked List
-//     this.tail = newNode;
+//     this.tail = newNode
 //     this.length++
+
+//     return this
 //   }
 // }
 
+// let newList = new SingleLinkedList()
+// newList.addNode(1)
+// newList.addNode(2)
+// newList.addNode(3)
+// newList.addNode(4)
+// newList.addNode(5)
+
+// console.log(newList)
