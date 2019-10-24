@@ -113,8 +113,14 @@ class SingleLinkedList {
     const removedNode = this.head;
     const secondNode = this.head.next
 
-    //reassign the head to the second Node and remove the first node
-    this.head = secondNode
+    //if there is only 1 node in the linked list, link list should be empty
+    if (secondNode === null) {
+      this.head = null
+      this.tail = null
+    } else {
+      //reassign the head to the second Node and remove the first node
+      this.head = secondNode
+    }
     this.length--
 
     return removedNode
@@ -133,13 +139,19 @@ newList.pop();
 // console.log(newList);    //expect 1 node(1)
 newList.pop();
 // console.log(newList);    //expect 0 node
+newList.pop();
+// console.log(newList);    //expect undefined
 
-newList.unshift(5)
 newList.unshift(4)
-// console.log(newList)        //expect 5 nodes(4, 5, 1, 2, 3)
+newList.unshift(5)
+// console.log(newList)        //expect 2 nodes(5, 4)
 
 newList.shift()
-console.log(newList);       //expect 4 nodes(5, 1, 2, 3)
+// console.log(newList);       //expect 1 nodes(4)
+newList.shift()
+// console.log(newList);       //expect 0 node
+newList.shift()
+// console.log(newList);       //expect undefined
 
 
 // newList.traverse()
