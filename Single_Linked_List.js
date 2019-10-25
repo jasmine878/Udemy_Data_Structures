@@ -129,22 +129,40 @@ class SingleLinkedList {
   //a method that gets a node at a specific location in a linked list
   get(index) {
     if (index < 0 || index >= this.length) {
-      return null
+      return null;
     }
-    let currentNode = this.head
+    let currentNode = this.head;
     // let currentIndex = currentNode.length
     //cannot use currentNode.length, because the length property measures the length of the linked list, not the currentNode.
     //The length of a currentNode returns undefined.
     //Therefore, use a counter instead
+    let counter = 0;
+
+    while (counter < index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+
+    return currentNode;
+  }
+
+  //a method that updates a node at a specific location in a linked list and returns true
+  set(index, val) {
+    if (index < 0 || index >= this.length) {
+      return false
+    }
+    let currentNode = this.head
     let counter = 0
 
-    while(counter < index) {
+    while (counter < index) {
       currentNode = currentNode.next
       counter++
     }
+    currentNode.val = val
 
-    return currentNode
+    return true
   }
+
 }
 
 
@@ -174,16 +192,18 @@ newList.shift()
 newList.shift()
 // console.log(newList);       //expect undefined
 
-newList.unshift(1)
-newList.unshift(2)
-newList.unshift(3)
-// console.log(newList)     //expect 3 nodes(3, 2, 1)
-newList.get(0)              //expect 1 node (val 3)
-newList.get(1)              //expect 1 node (val 2)
-newList.get(2)              //expect 1 node (val 1)
-newList.get(3)              //expect null
+let anotherList = new SingleLinkedList()
+anotherList.unshift(1)
+anotherList.unshift(2);
+anotherList.unshift(3);
+// console.log(newList)          //expect 3 nodes (3, 2, 1)
+anotherList.get(0);              //expect 1 node (val 3)
+anotherList.get(1);              //expect 1 node (val 2)
+anotherList.get(2);              //expect 1 node (val 1)
+anotherList.get(3);              //expect null
 
-
+anotherList.set(1, 22);          //expect 3 nodes (3, 22, 1)
+console.log(anotherList)         //expect 3 nodes (3, 2, 1)
 
 // newList.traverse()
 
