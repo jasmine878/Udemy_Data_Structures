@@ -209,6 +209,35 @@ class SingleLinkedList {
 
     return removedNode
   }
+
+  //a method that reverses a linked list in place
+  reverse() {
+    let currentNode = this.head
+    let beforeNode = null
+    let afterNode = currentNode.next
+
+    //swap the head and the tail
+    this.head = this.tail
+    this.tail = currentNode
+
+    while (afterNode) {
+      currentNode.next = beforeNode
+      beforeNode = currentNode
+      currentNode = afterNode
+      afterNode = currentNode.next
+      //3 -> 22 -> 33 -> null
+      //beforeNode =  null,     3,      22
+      //currentNode =   3,      22      33
+      //afterNode =     22,     33      undefined
+      //null <- 3,                22 -> 33 -> null
+      //null <- 3 <- 22,          33 -> null
+    }
+    //need to change the direction of the last node
+    //null <- 3 <- 22 <- 33
+    currentNode.next = beforeNode
+
+    return this
+  }
 }
 
 
@@ -263,7 +292,16 @@ anotherList.remove(4)
 anotherList.remove(0)
 // console.log(anotherList)           //expect 4 nodes (3, 22, 33, 111)
 anotherList.remove(3)
-console.log(anotherList)           //expect 3 nodes (3, 22, 33)
+// console.log(anotherList)           //expect 3 nodes (3, 22, 33)
+
+anotherList.reverse()
+// console.log(anotherList)              //expect 3 nodes (33, 22, 3)
+anotherList.unshift(50)
+// console.log(anotherList)              //expect 4 nodes (50, 33, 22, 3)
+anotherList.reverse()
+console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
+
+
 
 
 
