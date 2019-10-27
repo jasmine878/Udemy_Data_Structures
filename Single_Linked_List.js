@@ -301,7 +301,13 @@ anotherList.unshift(50)
 anotherList.reverse()
 console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
 
+//Time Complexity:  for insertion O(1)        vs. Arrays:  O(n)
+//Time Complexity:  for removal front O(1)    vs. Arrays:  O(n)
+//Time Complexity:  for removal back O(n)     vs. Arrays:  O(1)
+//Time Complexity:  for traverse method O(n)  vs. Arrays:  O(n)
+//Time Complexity:  for get method O(n)       vs. Arrays:  O(1)
 
+//Space Complexity: O(1)
 
 
 
