@@ -149,20 +149,46 @@ class SingleLinkedList {
   //a method that updates a node at a specific location in a linked list and returns true
   set(index, val) {
     if (index < 0 || index >= this.length) {
-      return false
+      return false;
     }
-    let currentNode = this.head
-    let counter = 0
+    let currentNode = this.head;
+    let counter = 0;
 
     while (counter < index) {
-      currentNode = currentNode.next
-      counter++
+      currentNode = currentNode.next;
+      counter++;
     }
-    currentNode.val = val
+    currentNode.val = val;
+
+    return true;
+  }
+
+  //a method that inserts a node at a specific location in a linked list
+  insert(index, val) {
+    //if index is equal to the length then add the new Node to the end
+    //of the linked list
+    if (index < 0 || index > this.length) {
+      return false
+    }
+    let newNode = new Node(val)
+
+    if (index === 0) {
+      newNode.next = this.head
+      this.head = newNode
+    } else if (index === this.length) {
+      this.tail.next = newNode
+      this.tail = newNode;
+    } else {
+      let beforeNewNode = this.get(index - 1);
+      let afterNewNode = this.get(index);
+
+      beforeNewNode.next = newNode;
+      newNode.next = afterNewNode;
+    }
+    this.length++
 
     return true
   }
-
 }
 
 
@@ -202,8 +228,17 @@ anotherList.get(1);              //expect 1 node (val 2)
 anotherList.get(2);              //expect 1 node (val 1)
 anotherList.get(3);              //expect null
 
-anotherList.set(1, 22);          //expect 3 nodes (3, 22, 1)
-console.log(anotherList)         //expect 3 nodes (3, 2, 1)
+anotherList.set(1, 22);
+// console.log(anotherList)         //expect 3 nodes (3, 22, 1)
+
+anotherList.insert(2, 33)
+// console.log(anotherList)         //expect 4 nodes (3, 22, 33, 1)
+anotherList.insert(0, 13)
+// console.log(anotherList)         //expect 5 nodes (13, 3, 22, 33, 1)
+anotherList.insert(5, 111)
+console.log(anotherList)         //expect 6 nodes (13, 3, 22, 33, 1, 111)
+
+
 
 // newList.traverse()
 
