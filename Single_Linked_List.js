@@ -189,6 +189,26 @@ class SingleLinkedList {
 
     return true
   }
+
+  //a method that removes a node at a specific location in a linked list
+  remove(index) {
+    if (index < 0 || index >= this.length) return null
+
+    let beforeNode = this.get(index - 1);
+    let removedNode = this.get(index)
+    let afterNode = this.get(index + 1)
+
+    if (index === 0) this.head = this.head.next
+    else if (index === this.length - 1) {
+      beforeNode.next = null
+      this.tail = beforeNode;
+    } else {
+      beforeNode.next = afterNode
+    }
+    this.length--
+
+    return removedNode
+  }
 }
 
 
@@ -236,7 +256,14 @@ anotherList.insert(2, 33)
 anotherList.insert(0, 13)
 // console.log(anotherList)         //expect 5 nodes (13, 3, 22, 33, 1)
 anotherList.insert(5, 111)
-console.log(anotherList)         //expect 6 nodes (13, 3, 22, 33, 1, 111)
+// console.log(anotherList)         //expect 6 nodes (13, 3, 22, 33, 1, 111)
+
+anotherList.remove(4)
+// console.log(anotherList)           //expect 5 nodes (13, 3, 22, 33, 111)
+anotherList.remove(0)
+// console.log(anotherList)           //expect 4 nodes (3, 22, 33, 111)
+anotherList.remove(3)
+console.log(anotherList)           //expect 3 nodes (3, 22, 33)
 
 
 
