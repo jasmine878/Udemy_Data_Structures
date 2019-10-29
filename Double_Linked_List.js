@@ -29,7 +29,7 @@ class DoubleLinkedList {
     this.length = 0
   }
 
-//a method that adds a node to the end of a linked list
+  //a method that adds a node to the end of a linked list
   push(val) {
     let newNode = new Node(val)
 
@@ -47,10 +47,39 @@ class DoubleLinkedList {
 
     return this
   }
+
+  //a method that removes a node from the end of a linked list
+  pop() {
+    if (this.head === null) return undefined
+
+    let removedNode = this.tail
+
+    if (this.head.next === null) {
+      this.head = null
+      this.tail = null
+    } else {
+      this.tail = removedNode.previous
+      this.tail.next = null
+      //need to sever both directions
+      removedNode.previous = null
+    }
+    this.length--
+
+    return removedNode
+  }
 }
 
 let newList = new DoubleLinkedList()
 newList.push(1)
 newList.push(2)
 newList.push(3)
-console.log(newList)          //expect 3 nodes(1, 2, 3)
+// console.log(newList)          //expect 3 nodes(1, 2, 3)
+
+newList.pop()
+newList.pop()
+// console.log(newList);    //expect 1 node(1)
+newList.pop()
+// console.log(newList);    //expect 0 node
+newList.pop()
+// console.log(newList);    //expect undefined
+
