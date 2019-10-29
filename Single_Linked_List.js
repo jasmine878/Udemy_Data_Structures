@@ -164,31 +164,31 @@
 //   }
 
 //   //a method that inserts a node at a specific location in a linked list
-//   insert(index, val) {
-//     //if index is equal to the length then add the new Node to the end
-//     //of the linked list
-//     if (index < 0 || index > this.length) {
-//       return false
-//     }
-//     let newNode = new Node(val)
+  // insert(index, val) {
+  //   //if index is equal to the length then add the new Node to the end
+  //   //of the linked list
+  //   if (index < 0 || index > this.length) {
+  //     return false
+  //   }
+  //   let newNode = new Node(val)
 
-//     if (index === 0) {
-//       newNode.next = this.head
-//       this.head = newNode
-//     } else if (index === this.length) {
-//       this.tail.next = newNode
-//       this.tail = newNode;
-//     } else {
-//       let beforeNewNode = this.get(index - 1);
-//       let afterNewNode = this.get(index);
+  //   if (index === 0) {
+  //     newNode.next = this.head
+  //     this.head = newNode
+  //   } else if (index === this.length) {
+  //     this.tail.next = newNode
+  //     this.tail = newNode;
+  //   } else {
+  //     let beforeNewNode = this.get(index - 1);
+  //     let afterNewNode = beforeNewNode.next
 
-//       beforeNewNode.next = newNode;
-//       newNode.next = afterNewNode;
-//     }
-//     this.length++
+  //     beforeNewNode.next = newNode;
+  //     newNode.next = afterNewNode;
+  //   }
+  //   this.length++
 
-//     return true
-//   }
+  //   return true
+  // }
 
   //a method that removes a node at a specific location in a linked list
   // remove(index) {
@@ -212,8 +212,8 @@
 
   // //a method that reverses a linked list in place
   // reverse() {
-  //   let currentNode = this.head
   //   let beforeNode = null
+  //   let currentNode = this.head
   //   let afterNode = currentNode.next
 
   //   //swap the head and the tail
@@ -221,8 +221,9 @@
   //   this.tail = currentNode
 
   //   while (afterNode) {
-  //     beforeNode = currentNode
   //     currentNode.next = beforeNode
+
+  //     beforeNode = currentNode
   //     currentNode = afterNode
   //     afterNode = currentNode.next
   //     //3 -> 22 -> 33 -> null
@@ -266,12 +267,12 @@ class SingleLinkedList {
     //add 1st Node to Single Linked List
     if (this.head === null) {
       this.head = newNode;
-      this.tail = newNode;
+
       //add additional nodes to Single Linked List
     } else {
       this.tail.next = newNode;
-      this.tail = newNode;
     }
+    this.tail = newNode;
     this.length++;
 
     return this;
@@ -283,15 +284,15 @@ class SingleLinkedList {
     if (this.head === null) return undefined;
 
     let currentNode = this.head;
-    let previousNode = null;
 
     //if there is only 1 node in the linked list, link list should be empty
     if (currentNode.next === null) {
       this.head = null;
       this.tail = null;
-      this.length--;
     } else {
       //traverse the linked list and store 2nd to last node
+      let previousNode = null;
+
       while (currentNode.next) {
         previousNode = currentNode;
         currentNode = currentNode.next;
@@ -299,8 +300,9 @@ class SingleLinkedList {
       //set the 2nd to last node as the new tail
       this.tail = previousNode;
       this.tail.next = null;
-      this.length--;
+
     }
+    this.length--;
 
     //return the removed Node
     return currentNode;
@@ -326,12 +328,12 @@ class SingleLinkedList {
   shift() {
     if (this.head === null) return undefined;
 
-    const removedNode = this.head;
-
     //if there is only 1 node in the linked list, link list should be empty
     if (this.head.next === null) {
       this.tail = null;
     }
+    const removedNode = this.head;
+
     //set new head as the 2nd node
     this.head = this.head.next;
     this.length--;
@@ -376,18 +378,16 @@ class SingleLinkedList {
       return false;
     }
 
-    if (index === 0) {
     //unshift and push already increments 1 to length property
-      this.unshift(val);
-    } else if (index === this.length) {
-      this.push(val);
-    } else {
+    if (index === 0) this.unshift(val);
+    else if (index === this.length) this.push(val);
+    else {
+      let beforeNode = this.get(index - 1);
       let newNode = new Node(val);
-      let beforeNewNode = this.get(index - 1);
-      let afterNewNode = beforeNewNode.next;
+      let afterNode = beforeNode.next;
 
-      beforeNewNode.next = newNode;
-      newNode.next = afterNewNode;
+      beforeNode.next = newNode;
+      newNode.next = afterNode;
       this.length++;
     }
 
@@ -397,20 +397,18 @@ class SingleLinkedList {
   //a method that removes a node at a specific location in a linked list
   remove(index) {
     if (index < 0 || index >= this.length) return null;
-
     if (index === 0) return this.shift()
-    else if (index === this.length - 1) {
-      return this.pop()
-    } else {
-      let beforeNode = this.get(index - 1);
-      let removedNode = beforeNode.next;
-      let afterNode = removedNode.next;
+    if (index === this.length - 1) return this.pop()
 
-      beforeNode.next = afterNode;
-      this.length--;
+    let beforeNode = this.get(index - 1);
+    let removedNode = beforeNode.next;
+    let afterNode = removedNode.next;
 
-      return removedNode;
-    }
+    beforeNode.next = afterNode;
+    this.length--;
+
+    return removedNode;
+
   }
 
     //a method that reverses a linked list in place
@@ -462,7 +460,7 @@ newList.shift()
 newList.shift()
 // console.log(newList);       //expect 0 node
 newList.shift()
-// console.log(newList);       //expect undefined
+// // console.log(newList);       //expect undefined
 
 let anotherList = new SingleLinkedList()
 anotherList.unshift(1)
