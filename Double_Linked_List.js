@@ -67,6 +67,28 @@ class DoubleLinkedList {
 
     return removedNode
   }
+
+  //a method that adds a node to the front of a linked list
+  unshift(val) {
+    let newNode = new Node(val)
+
+    if (this.head === null) {
+      this.head = newNode
+      this.tail = newNode
+    } else {
+      this.head.previous = newNode
+      newNode.next = this.head
+      this.head = newNode
+    }
+    this.length++
+
+    return this
+  }
+
+  //a method that removes a node from the front of a linked list
+  shift() {
+
+  }
 }
 
 let newList = new DoubleLinkedList()
@@ -83,3 +105,7 @@ newList.pop()
 newList.pop()
 // console.log(newList);    //expect undefined
 
+newList.unshift(4)
+// console.log(newList)        //expect 1 node (4)
+newList.unshift(5)
+console.log(newList)        //expect 2 nodes(5, 4)

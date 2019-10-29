@@ -451,7 +451,7 @@ newList.pop();
 // console.log(newList);    //expect undefined
 
 newList.unshift(4)
-// console.log(newList)        //expect 1 nodes
+// console.log(newList)        //expect 1 node (4)
 newList.unshift(5)
 // console.log(newList)        //expect 2 nodes(5, 4)
 
