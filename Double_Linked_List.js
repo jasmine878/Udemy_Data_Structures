@@ -7,6 +7,21 @@ class Node {
   }
 }
 
+//as we add more Nodes to a Double Linked List,
+//we update the next property of the last Node
+//AND update the previous property of the new node
+
+// let firstNode = new Node(1)
+// firstNode.next = new Node (2)
+// firstNode.next.previous = firstNode
+// firstNode.next.next = new Node(3)
+// firstNode.next.next.previous = firstNode.next
+
+// console.log("1st Node", firstNode)
+// console.log("2nd Node", firstNode.next)
+// console.log("3rd Node", firstNode.next.next)
+
+
 class DoubleLinkedList {
   constructor() {
     this.head = null
@@ -14,5 +29,28 @@ class DoubleLinkedList {
     this.length = 0
   }
 
+//a method that adds a node to the end of a linked list
+  push(val) {
+    let newNode = new Node(val)
 
+    if (this.head === null) {
+      this.head = newNode
+      this.tail = newNode
+    } else {
+      newNode.previous = this.tail
+      this.tail.next = newNode
+      //EITHER WAY WORKS!!
+      // newNode.previous = this.tail;
+      this.tail = newNode
+    }
+    this.length++
+
+    return this
+  }
 }
+
+let newList = new DoubleLinkedList()
+newList.push(1)
+newList.push(2)
+newList.push(3)
+console.log(newList)          //expect 3 nodes(1, 2, 3)
