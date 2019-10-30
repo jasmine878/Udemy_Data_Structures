@@ -154,6 +154,7 @@ class DoubleLinkedList {
     return currentNode;
   }
 
+  //a method that updates a node at a specific location in a linked list and returns true
   set(index, val) {
     let foundNode = this.get(index)
 
@@ -163,6 +164,27 @@ class DoubleLinkedList {
     }
 
     return false
+  }
+
+  //a method that inserts a node at a specific location in a linked list and returns true
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false
+
+    if (index === 0) this.unshift(val)
+    else if (index === this.length) this.push(val)
+    else {
+      let beforeNode = this.get(index - 1);
+      let newNode = new Node(val)
+      let afterNode = beforeNode.next;
+
+      beforeNode.next = newNode
+      newNode.previous = beforeNode
+      newNode.next = afterNode
+      afterNode.previous = newNode
+      this.length++
+    }
+
+    return true
   }
 
 }
@@ -202,3 +224,13 @@ anotherList.get(0);              //expect 1 node (val 3)
 anotherList.get(1);              //expect 1 node (val 2)
 anotherList.get(2);              //expect 1 node (val 1)
 anotherList.get(3);              //expect null
+
+anotherList.set(1, 22)
+// console.log(anotherList)         //expect 3 nodes (3, 22, 1)
+
+anotherList.insert(2, 33)
+// console.log(anotherList)         //expect 4 nodes (3, 22, 33, 1)
+anotherList.insert(0, 13)
+// console.log(anotherList)         //expect 5 nodes (13, 3, 22, 33, 1)
+anotherList.insert(5, 111)
+// console.log(anotherList)         //expect 6 nodes (13, 3, 22, 33, 1, 111)
