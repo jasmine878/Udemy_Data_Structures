@@ -87,7 +87,24 @@ class DoubleLinkedList {
 
   //a method that removes a node from the front of a linked list
   shift() {
+    if (this.length === 0) return undefined
 
+    let removedNode = this.head
+
+    if (removedNode.next === null) {
+      this.head = null
+      this.tail = null
+    } else {
+      let secondNode = removedNode.next
+
+      this.head = secondNode;
+      //sever the 1st and 2nd nodes
+      secondNode.previous = null
+      removedNode.next = null;
+    }
+    this.length--
+
+    return removedNode
   }
 }
 
@@ -108,4 +125,11 @@ newList.pop()
 newList.unshift(4)
 // console.log(newList)        //expect 1 node (4)
 newList.unshift(5)
-console.log(newList)        //expect 2 nodes(5, 4)
+// console.log(newList)        //expect 2 nodes(5, 4)
+
+newList.shift()
+// console.log(newList);       //expect 1 node (4)
+newList.shift()
+// console.log(newList);       //expect 0 node
+newList.shift()
+// console.log(newList);       //expect undefined

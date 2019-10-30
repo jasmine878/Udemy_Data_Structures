@@ -460,7 +460,7 @@ newList.shift()
 newList.shift()
 // console.log(newList);       //expect 0 node
 newList.shift()
-// // console.log(newList);       //expect undefined
+// console.log(newList);       //expect undefined
 
 let anotherList = new SingleLinkedList()
 anotherList.unshift(1)
