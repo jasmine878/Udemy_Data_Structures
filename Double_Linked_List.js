@@ -108,18 +108,50 @@ class DoubleLinkedList {
   }
 
   //a method that gets a node at a specific location in a linked list
+  // get(index) {
+  //   if (index < 0 || index >= this.length) return null
+
+  //   let currentNode = this.head
+  //   let counter = 0
+
+  //   while (counter < index) {
+  //     currentNode = currentNode.next
+  //     counter++
+  //   }
+
+  //   return currentNode
+  // }
+
+  //we can optimize the get method in a double linked list
+  //by searcing from the tail if the index is greater than the middle node in the linked list
+  //THIS IS DUE TO THE FACT THAT THE INDEX IS ALREADY SORTED OR IN ORDER!!
   get(index) {
-    if (index < 0 || index >= this.length) return null
+    // debugger
+    if (index < 0 || index >= this.length) {
+      return null
+    }
+    let currentNode
+    let counter
 
-    let currentNode = this.head
-    let counter = 0
+    if (index < this.length / 2) {
+      currentNode = this.head
+      counter = 0
 
-    while (counter < index) {
-      currentNode = currentNode.next
-      counter++
+      while (counter < index) {
+        currentNode = currentNode.next
+        counter++
+      }
+    } else {
+      currentNode = this.tail
+      counter = this.length - 1
+
+      while (counter > index) {
+        currentNode = currentNode.previous
+        counter--
+      }
     }
 
-    return currentNode
+    return currentNode;
   }
 
   set(index, val) {
