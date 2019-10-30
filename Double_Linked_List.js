@@ -208,6 +208,14 @@ class DoubleLinkedList {
 
 }
 
+//Time Complexity:  push, unshift - O(1)
+//Time Complexity:  insert - O(1)
+//Time Complexity:  shift - O(1)
+//Time Complexity:  pop - O(1)
+//Tine Complexity:  remove - O(1)
+//Time Complexity:  get - O(n)
+//Time Complexity:  set - O(n)
+
 let newList = new DoubleLinkedList()
 newList.push(1)
 newList.push(2)

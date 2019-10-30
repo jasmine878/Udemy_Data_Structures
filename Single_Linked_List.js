@@ -435,6 +435,25 @@ class SingleLinkedList {
     }
 }
 
+//Time Complexity:  push, unshift - O(1)
+//Time Complexity:  insert - O(1)
+//Time Complexity:  shift - O(1)
+//Time Complexity:  pop - O(n)
+//Tine Complexity:  remove - O(n)
+//Time Complexity:  get - O(n)
+//Time Complexity:  set - O(n)
+
+
+//vs. Time Complexity (ARRAYS):  push - O(1)
+//vs. Time Complexity (ARRAYS):  unshift - O(n)
+//vs. Time Complexity (ARRAYS):  insert - O(n)
+//vs. Time Complexity (ARRAYS):  shift - O(n)
+//vs. Time Complexity (ARRAYS):  pop - O(1)
+//vs. Time Complexity (ARRAYS):  remove - O(n)
+//vs. Time Complexity (ARRAYS):  get - O(1)
+//vs. Time Complexity (ARRAYS):  set - O(1)
+
+//Space Complexity:  O(1)
 
 let newList = new SingleLinkedList()
 newList.push(1)
