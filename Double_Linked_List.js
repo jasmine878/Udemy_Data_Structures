@@ -106,6 +106,21 @@ class DoubleLinkedList {
 
     return removedNode
   }
+
+  //a method that gets a node at a specific location in a linked list
+  get(index) {
+    if (index < 0 || index >= this.length) return null
+
+    let currentNode = this.head
+    let counter = 0
+
+    while (counter < index) {
+      currentNode = currentNode.next
+      counter++
+    }
+
+    return currentNode
+  }
 }
 
 let newList = new DoubleLinkedList()
@@ -133,3 +148,13 @@ newList.shift()
 // console.log(newList);       //expect 0 node
 newList.shift()
 // console.log(newList);       //expect undefined
+
+let anotherList = new DoubleLinkedList()
+anotherList.unshift(1)
+anotherList.unshift(2)
+anotherList.unshift(3)
+// console.log(anotherList)          //expect 3 nodes (3, 2, 1)
+anotherList.get(0);              //expect 1 node (val 3)
+anotherList.get(1);              //expect 1 node (val 2)
+anotherList.get(2);              //expect 1 node (val 1)
+anotherList.get(3);              //expect null
