@@ -394,7 +394,7 @@ class SingleLinkedList {
     return true;
   }
 
-  //a method that removes a node at a specific location in a linked list
+  //a method that removes a node at a specific location in a linked list and returns the removed node
   remove(index) {
     if (index < 0 || index >= this.length) return null;
     if (index === 0) return this.shift()

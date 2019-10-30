@@ -187,6 +187,25 @@ class DoubleLinkedList {
     return true
   }
 
+  //a method that removes a node at a specific location in a linked list and returns the removed node
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined
+    if (index === 0) return this.shift()
+    if (index === this.length - 1) return this.pop()
+
+    let removedNode = this.get(index);
+    let beforeNode = removedNode.previous
+    let afterNode = removedNode.next
+
+    beforeNode.next = afterNode
+    afterNode.previous = beforeNode
+    removedNode.previous = null
+    removedNode.next = null
+    this.length--
+
+    return removedNode
+  }
+
 }
 
 let newList = new DoubleLinkedList()
@@ -234,3 +253,10 @@ anotherList.insert(0, 13)
 // console.log(anotherList)         //expect 5 nodes (13, 3, 22, 33, 1)
 anotherList.insert(5, 111)
 // console.log(anotherList)         //expect 6 nodes (13, 3, 22, 33, 1, 111)
+
+anotherList.remove(4)
+// console.log(anotherList)           //expect 5 nodes (13, 3, 22, 33, 111)
+anotherList.remove(0)
+// console.log(anotherList)           //expect 4 nodes (3, 22, 33, 111)
+anotherList.remove(3)
+console.log(anotherList)           //expect 3 nodes (3, 22, 33)
