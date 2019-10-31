@@ -24,87 +24,87 @@ class Node {
 
 class DoubleLinkedList {
   constructor() {
-    this.head = null
-    this.tail = null
-    this.length = 0
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
   //a method that adds a node to the end of a linked list
   push(val) {
-    let newNode = new Node(val)
+    let newNode = new Node(val);
 
     if (this.head === null) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      newNode.previous = this.tail
-      this.tail.next = newNode
+      newNode.previous = this.tail;
+      this.tail.next = newNode;
       //EITHER WAY WORKS!!
       // newNode.previous = this.tail;
-      this.tail = newNode
+      this.tail = newNode;
     }
-    this.length++
+    this.length++;
 
-    return this
+    return this;
   }
 
   //a method that removes a node from the end of a linked list
   pop() {
-    if (this.head === null) return undefined
+    if (this.head === null) return undefined;
 
-    let removedNode = this.tail
+    let removedNode = this.tail;
 
     if (this.head.next === null) {
-      this.head = null
-      this.tail = null
+      this.head = null;
+      this.tail = null;
     } else {
-      this.tail = removedNode.previous
-      this.tail.next = null
+      this.tail = removedNode.previous;
+      this.tail.next = null;
       //need to sever both directions
-      removedNode.previous = null
+      removedNode.previous = null;
     }
-    this.length--
+    this.length--;
 
-    return removedNode
+    return removedNode;
   }
 
   //a method that adds a node to the front of a linked list
   unshift(val) {
-    let newNode = new Node(val)
+    let newNode = new Node(val);
 
     if (this.head === null) {
-      this.head = newNode
-      this.tail = newNode
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      this.head.previous = newNode
-      newNode.next = this.head
-      this.head = newNode
+      this.head.previous = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
     }
-    this.length++
+    this.length++;
 
-    return this
+    return this;
   }
 
   //a method that removes a node from the front of a linked list
   shift() {
-    if (this.length === 0) return undefined
+    if (this.length === 0) return undefined;
 
-    let removedNode = this.head
+    let removedNode = this.head;
 
     if (removedNode.next === null) {
-      this.head = null
-      this.tail = null
+      this.head = null;
+      this.tail = null;
     } else {
-      let secondNode = removedNode.next
+      let secondNode = removedNode.next;
 
       this.head = secondNode;
       //sever the 1st and 2nd nodes
-      secondNode.previous = null
+      secondNode.previous = null;
       removedNode.next = null;
     }
-    this.length--
+    this.length--;
 
-    return removedNode
+    return removedNode;
   }
 
   //a method that gets a node at a specific location in a linked list
@@ -128,18 +128,18 @@ class DoubleLinkedList {
   get(index) {
     // debugger
     if (index < 0 || index >= this.length) {
-      return null
+      return null;
     }
-    let currentNode = this.head
-    let counter = 0
+    let currentNode = this.head;
+    let counter = 0;
 
     if (index > this.length / 2) {
-      currentNode = this.tail
-      counter = this.length - 1
+      currentNode = this.tail;
+      counter = this.length - 1;
 
       while (counter > index) {
-        currentNode = currentNode.previous
-        counter--
+        currentNode = currentNode.previous;
+        counter--;
       }
     } else {
       while (counter < index) {
@@ -153,56 +153,77 @@ class DoubleLinkedList {
 
   //a method that updates a node at a specific location in a linked list and returns true
   set(index, val) {
-    let foundNode = this.get(index)
+    let foundNode = this.get(index);
 
     if (foundNode) {
-      foundNode.val = val
-      return true
+      foundNode.val = val;
+      return true;
     }
 
-    return false
+    return false;
   }
 
   //a method that inserts a node at a specific location in a linked list and returns true
   insert(index, val) {
-    if (index < 0 || index > this.length) return false
+    if (index < 0 || index > this.length) return false;
 
-    if (index === 0) this.unshift(val)
-    else if (index === this.length) this.push(val)
+    if (index === 0) this.unshift(val);
+    else if (index === this.length) this.push(val);
     else {
       let beforeNode = this.get(index - 1);
-      let newNode = new Node(val)
+      let newNode = new Node(val);
       let afterNode = beforeNode.next;
 
-      beforeNode.next = newNode
-      newNode.previous = beforeNode
-      newNode.next = afterNode
-      afterNode.previous = newNode
-      this.length++
+      beforeNode.next = newNode;
+      newNode.previous = beforeNode;
+      newNode.next = afterNode;
+      afterNode.previous = newNode;
+      this.length++;
     }
 
-    return true
+    return true;
   }
 
   //a method that removes a node at a specific location in a linked list and returns the removed node
   remove(index) {
-    if (index < 0 || index >= this.length) return undefined
-    if (index === 0) return this.shift()
-    if (index === this.length - 1) return this.pop()
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
 
     let removedNode = this.get(index);
-    let beforeNode = removedNode.previous
-    let afterNode = removedNode.next
+    let beforeNode = removedNode.previous;
+    let afterNode = removedNode.next;
 
-    beforeNode.next = afterNode
-    afterNode.previous = beforeNode
-    removedNode.previous = null
-    removedNode.next = null
-    this.length--
+    beforeNode.next = afterNode;
+    afterNode.previous = beforeNode;
+    removedNode.previous = null;
+    removedNode.next = null;
+    this.length--;
 
-    return removedNode
+    return removedNode;
   }
 
+  reverse() {
+    let beforeNode = null;
+    let currentNode = this.head;
+    let afterNode = currentNode.next;
+
+    this.head = this.tail
+    this.tail = currentNode
+
+    while (afterNode) {
+      currentNode.next = beforeNode;
+      currentNode.previous = afterNode;
+
+      beforeNode = currentNode;
+      currentNode = afterNode;
+      afterNode = afterNode.next;
+    }
+    currentNode.next = beforeNode;
+    currentNode.previous = afterNode;
+
+    return this;
+  }
 }
 
 //Time Complexity:  push, unshift - O(1)    vs. Single Linked List:  same
@@ -266,4 +287,11 @@ anotherList.remove(4)
 anotherList.remove(0)
 // console.log(anotherList)           //expect 4 nodes (3, 22, 33, 111)
 anotherList.remove(3)
-console.log(anotherList)           //expect 3 nodes (3, 22, 33)
+// console.log(anotherList)           //expect 3 nodes (3, 22, 33)
+
+anotherList.reverse()
+// console.log(anotherList)              //expect 3 nodes (33, 22, 3)
+anotherList.unshift(50)
+// console.log(anotherList)              //expect 4 nodes (50, 33, 22, 3)
+anotherList.reverse()
+// console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
