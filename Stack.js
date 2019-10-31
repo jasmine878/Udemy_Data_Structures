@@ -2,21 +2,12 @@
 let stack = []
 
 //using unshift and shift methods - LIFO
-stack.unshift(3)
-stack.unshift(2)
-stack.unshift(1)
-// console.log(stack)       //expect [1, 2, 3]
-
-stack.shift()
-// console.log(stack)       //expect [2, 3]
-stack.shift()
-// console.log(stack);      //expect [3]
-stack.shift()
-// console.log(stack);      //expect []
-stack.shift()
-// console.log(stack);      //expect []
+//Time Complexity:  O(n)
+//Space Complexity:  O(n)
 
 //using push and pop methods - LIFO
+//Time Complexity:  O(1)
+//Space Complexity:  O(n)
 stack.push(3)
 stack.push(2)
 stack.push(1)
@@ -33,64 +24,85 @@ stack.pop()
 
 
 //creating a stack using a Single Linked List
+//Time Complexity:  push and pop - O(1)
+//Time Complexity:  searching and accessing - O(n)
+//Space Complexity:  O(n)
 //first Node
-// class Node {
-//   constructor(val) {
-//     this.val = val
-//     this.next = null
-//   }
-// }
+class Node {
+  constructor(val) {
+    this.val = val
+    this.next = null
+  }
+}
 
-// //similar to a Single Linked List
-// class Stack {
-//   constructor() {
-//     this.head = null
-//     this.tail = null
-//     this.length = 0
-//   }
+//similar to a Single Linked List
+class Stack {
+  constructor() {
+    this.firstNode = null;
+    this.lastNode = null;
+    this.size = 0;
+  }
 
-//   push(val) {
-//     let newNode = new Node(val);
+  //a method that adds a node to the top of a stack
+  //and returns the size of the stack
+  push(val) {
+    let newNode = new Node(val);
 
-//     if (this.length === 0) {
-//       this.tail = newNode
-//     } else {
-//       newNode.next = this.head
-//     }
-//     this.head = newNode
-//     this.length++
+    if (this.size === 0) {
+      this.lastNode = newNode;
+    } else {
+      newNode.next = this.firstNode;
+    }
+    this.firstNode = newNode;
+    this.size++;
 
-//     return this
-//   }
+    return this.size;
+  }
 
-//   pop() {
-//     if (this.length === 0) return null
+  //a method that removes a node from the top of a stack
+  //and returns its value
+  // pop() {
+  //   if (this.length === 0) return null
 
-//     let removedNode = this.head
+  //   let removedNode = this.firstNode
 
-//     if (this.length === 1) {
-//       this.head === null
-//       this.tail === null
-//     } else {
-//       this.head = removedNode.next;
-//     }
-//     this.length--
+  //   if (this.length === 1) {
+  //     this.firstNode === null
+  //     this.lastNode === null
+  //   } else {
+  //     this.firstNode = removedNode.next;
+  //   }
+  //   this.length--
 
-//     return removedNode
-//   }
-// }
+  //   return removedNode.val
+  // }
 
-// let newStack = new Stack()
-// newStack.push(3)
-// newStack.push(2)
-// newStack.push(1)
-// // console.log(newStack)         //expect 3 nodes (1, 2, 3)
+  pop() {
+    if (this.size === 0) return null;
 
-// newStack.pop()
-// // console.log(newStack)       //expect 2 nodes (2, 3)
-// newStack.pop()
-// // console.log(newStack)       //expect 1 node1 (3)
-// newStack.pop()
-// // console.log(newStack)       //expect 0 nodes
-// newStack.pop()
-// // console.log(newStack)       //expect 0 nodes
+    let removedNode = this.firstNode;
+
+    if (this.size === 1) {
+      this.lastNode = null;
+    }
+    this.firstNode = removedNode.next;
+    this.size--;
+
+    return removedNode;
+  }
+}
+
+let newStack = new Stack()
+console.log(newStack.push(3))     //expect 1
+console.log(newStack.push(2))     //expect 2
+console.log(newStack.push(1))     //expect 3
+// console.log(newStack)             //expect 3 nodes (1, 2, 3)
+
+console.log(newStack.pop())    //expect 1
+// console.log(newStack)       //expect 2 nodes (2, 3)
+console.log(newStack.pop())    //expect 2
+// console.log(newStack)       //expect 1 node (3)
+console.log(newStack.pop())    //expect 3
+// console.log(newStack)       //expect 0 nodes
+console.log(newStack.pop())    //expect null
+console.log(newStack)       //expect 0 nodes
