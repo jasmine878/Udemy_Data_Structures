@@ -130,24 +130,21 @@ class DoubleLinkedList {
     if (index < 0 || index >= this.length) {
       return null
     }
-    let currentNode
-    let counter
+    let currentNode = this.head
+    let counter = 0
 
-    if (index < this.length / 2) {
-      currentNode = this.head
-      counter = 0
-
-      while (counter < index) {
-        currentNode = currentNode.next
-        counter++
-      }
-    } else {
+    if (index > this.length / 2) {
       currentNode = this.tail
       counter = this.length - 1
 
       while (counter > index) {
         currentNode = currentNode.previous
         counter--
+      }
+    } else {
+      while (counter < index) {
+        currentNode = currentNode.next;
+        counter++;
       }
     }
 
@@ -208,13 +205,15 @@ class DoubleLinkedList {
 
 }
 
-//Time Complexity:  push, unshift - O(1)
-//Time Complexity:  insert - O(1)
-//Time Complexity:  shift - O(1)
-//Time Complexity:  pop - O(1)
-//Tine Complexity:  remove - O(1)
-//Time Complexity:  get - O(n)
-//Time Complexity:  set - O(n)
+//Time Complexity:  push, unshift - O(1)    vs. Single Linked List:  same
+//Time Complexity:  insert - O(1)           vs. Single Linked List:  same
+//Time Complexity:  shift - O(1)            vs. Single Linked List:  same
+//Time Complexity:  pop - O(1)              vs. Single Linked List:  different O(n)
+//Tine Complexity:  remove - O(1)           vs. Single Linked List:  different O(n)
+//Time Complexity:  get - O(n)              vs. Single Linked List:  same
+//Time Complexity:  set - O(n)              vs. Single Linked List:  same
+
+
 
 let newList = new DoubleLinkedList()
 newList.push(1)
