@@ -203,26 +203,46 @@ class DoubleLinkedList {
     return removedNode;
   }
 
+  // reverse() {
+  //   let beforeNode = null;
+  //   let currentNode = this.head;
+  //   let afterNode = currentNode.next;
+
+  //   this.head = this.tail
+  //   this.tail = currentNode
+
+  //   while (afterNode) {
+  //     currentNode.next = beforeNode;
+  //     currentNode.previous = afterNode;
+
+  //     beforeNode = currentNode;
+  //     currentNode = afterNode;
+  //     afterNode = afterNode.next;
+  //   }
+  //   currentNode.next = beforeNode;
+  //   currentNode.previous = afterNode;
+
+  //   return this;
+  // }
   reverse() {
-    let beforeNode = null;
-    let currentNode = this.head;
-    let afterNode = currentNode.next;
+    let beforeNode = null
+    let currentNode = this.head
+    let afterNode
 
     this.head = this.tail
     this.tail = currentNode
 
-    while (afterNode) {
-      currentNode.next = beforeNode;
-      currentNode.previous = afterNode;
+    for (let i = 0; i < this.length; i++) {
+      afterNode = currentNode.next
 
-      beforeNode = currentNode;
-      currentNode = afterNode;
-      afterNode = afterNode.next;
+      currentNode.next = beforeNode
+      currentNode.prev = afterNode
+
+      beforeNode = currentNode
+      currentNode = afterNode
     }
-    currentNode.next = beforeNode;
-    currentNode.previous = afterNode;
 
-    return this;
+    return this
   }
 }
 
@@ -294,4 +314,4 @@ anotherList.reverse()
 anotherList.unshift(50)
 // console.log(anotherList)              //expect 4 nodes (50, 33, 22, 3)
 anotherList.reverse()
-// console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
+console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
