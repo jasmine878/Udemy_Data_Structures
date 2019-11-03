@@ -74,6 +74,12 @@ class BinarySearchTree {
 // tree.root.left.right = new Node(7)
 // console.log(tree)
 
+//Time Complexity:  Insert - O(log n) on average
+//Time Complexity:  Search - O(log n) on average
+//ONLY IF THE TREE IS WELL BALANCED
+//IF THE TREE IS UNBALANCED SIMILAR TO LINEAR OR 1 BRANCH ONLY,
+//THEN TIME COMPLEXITY WOULD BE O(N)
+
 let newTree = new BinarySearchTree
 newTree.insert(10)
 newTree.insert(5)
