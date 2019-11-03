@@ -12,6 +12,7 @@ class BinarySearchTree {
   constructor() {
     this.root = null
   }
+  //ITERATIVE SOLUTION
   insert(val) {
     let newNode = new Node(val)
     let currentNode = this.root
@@ -22,7 +23,9 @@ class BinarySearchTree {
     }
 
     while (true) {
+      //a binary search tree has children with values greater than or less than the parent node
       if (currentNode.val === val) return undefined
+      //change the child node to parent node as we move down the tree
       if (currentNode.val > val) {
         if (currentNode.left === null) {
           currentNode.left = newNode;
@@ -36,6 +39,26 @@ class BinarySearchTree {
         } else currentNode = currentNode.right
       }
     }
+  }
+
+  //similar to insert method
+  search(val) {
+    let currentNode = this.root
+
+    if (currentNode === null) return null
+
+    while(true) {
+      if (currentNode.val === val) return currentNode
+      if (currentNode.val > val) {
+        if (currentNode.left === null) return false
+        else currentNode = currentNode.left
+      }
+      if (currentNode.val < val) {
+        if (currentNode.right === null) return false
+        else currentNode = currentNode.right
+      }
+    }
+
   }
 }
 
@@ -59,3 +82,8 @@ newTree.insert(2)
 newTree.insert(7)
 newTree.insert(11)
 newTree.insert(16)
+
+newTree.search(11)        //expect 1 node (11)
+newTree.search(5)         //expect 1 node (5)
+newTree.search(0)         //expect false
+newTree.search(100)       //expect false
