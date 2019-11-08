@@ -101,6 +101,23 @@ class BinarySearchTree {
 
     return result
   }
+
+  dfsPostOrder() {
+    debugger
+    let result = []
+
+    function traverse(node) {
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right)
+
+      result.push(node)
+    }
+
+    //invoke the helper function and traverse the entire tree from the root
+    traverse(this.root)
+
+    return result
+  }
 }
 
 //      10
@@ -138,5 +155,8 @@ newTree.search(100)       //expect false
 // console.log(newTree.breadthFirstSearch())
 //expect [10, 5, 15, 2, 7, 11, 16]
 
-console.log(newTree.dfsPreOrder())
+// console.log(newTree.dfsPreOrder())
 //expect [10, 5, 2, 7, 15, 11, 16]
+
+console.log(newTree.dfsPostOrder())
+//expect [2, 7, 5, 11, 16, 15, 10]
