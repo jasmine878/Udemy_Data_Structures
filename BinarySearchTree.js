@@ -118,6 +118,21 @@ class BinarySearchTree {
 
     return result
   }
+
+  dfsInOrder() {
+    debugger
+    let result = []
+
+    function traverse(node) {
+      if (node.left) traverse(node.left)
+      result.push(node)
+      if (node.right) traverse(node.right)
+    }
+
+    traverse(this.root)
+
+    return result
+  }
 }
 
 //      10
@@ -158,5 +173,8 @@ newTree.search(100)       //expect false
 // console.log(newTree.dfsPreOrder())
 //expect [10, 5, 2, 7, 15, 11, 16]
 
-console.log(newTree.dfsPostOrder())
+// console.log(newTree.dfsPostOrder())
 //expect [2, 7, 5, 11, 16, 15, 10]
+
+console.log(newTree.dfsInOrder())
+//expect [2, 5, 7, 10, 11, 15, 16]
