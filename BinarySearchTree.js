@@ -60,6 +60,27 @@ class BinarySearchTree {
     }
 
   }
+
+  breadthFirstSearch() {
+    let tempQueue = []
+    let result = []
+    let currentNode
+
+    if (this.root) tempQueue.push(this.root)
+
+    while (tempQueue.length > 0) {
+      currentNode = tempQueue.shift()
+
+      if (currentNode) {
+        //it doesn't have to be a binary tree.  It can be a ternary tree or more!
+        if (currentNode.left) tempQueue.push(currentNode.left)
+        if (currentNode.right) tempQueue.push(currentNode.right)
+
+        result.push(currentNode)
+      }
+    }
+    return result
+  }
 }
 
 //      10
@@ -93,3 +114,6 @@ newTree.search(11)        //expect 1 node (11)
 newTree.search(5)         //expect 1 node (5)
 newTree.search(0)         //expect false
 newTree.search(100)       //expect false
+
+console.log(newTree.breadthFirstSearch())
+//expect [10, 5, 15, 2, 7, 11, 16]
