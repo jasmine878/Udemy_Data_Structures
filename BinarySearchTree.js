@@ -10,75 +10,95 @@ class Node {
 //similar to a Single Linked List
 class BinarySearchTree {
   constructor() {
-    this.root = null
+    this.root = null;
   }
   //ITERATIVE SOLUTION
   insert(val) {
-    let newNode = new Node(val)
-    let currentNode = this.root
+    let newNode = new Node(val);
+    let currentNode = this.root;
 
     if (currentNode === null) {
-      this.root = newNode
-      return this
+      this.root = newNode;
+      return this;
     }
 
     while (true) {
       //a binary search tree has children with values greater than or less than the parent node
-      if (currentNode.val === val) return undefined
+      if (currentNode.val === val) return undefined;
       //change the child node to parent node as we move down the tree
       if (currentNode.val > val) {
         if (currentNode.left === null) {
           currentNode.left = newNode;
-          return this
+          return this;
         } else currentNode = currentNode.left;
       }
       if (currentNode.val < val) {
         if (currentNode.right === null) {
-          currentNode.right = newNode
-          return this
-        } else currentNode = currentNode.right
+          currentNode.right = newNode;
+          return this;
+        } else currentNode = currentNode.right;
       }
     }
   }
 
   //similar to insert method
   search(val) {
-    let currentNode = this.root
+    let currentNode = this.root;
 
-    if (currentNode === null) return null
+    if (currentNode === null) return null;
 
-    while(true) {
-      if (currentNode.val === val) return currentNode
+    while (true) {
+      if (currentNode.val === val) return currentNode;
       if (currentNode.val > val) {
-        if (currentNode.left === null) return false
-        else currentNode = currentNode.left
+        if (currentNode.left === null) return false;
+        else currentNode = currentNode.left;
       }
       if (currentNode.val < val) {
-        if (currentNode.right === null) return false
-        else currentNode = currentNode.right
+        if (currentNode.right === null) return false;
+        else currentNode = currentNode.right;
       }
     }
-
   }
 
+  //ITERATIVE SOLUTION
   breadthFirstSearch() {
-    let tempQueue = []
-    let result = []
-    let currentNode
+    let tempQueue = [];
+    let result = [];
+    let currentNode;
 
-    if (this.root) tempQueue.push(this.root)
+    if (this.root) tempQueue.push(this.root);
 
     while (tempQueue.length > 0) {
-      currentNode = tempQueue.shift()
+      currentNode = tempQueue.shift();
 
       if (currentNode) {
         //it doesn't have to be a binary tree.  It can be a ternary tree or more!
-        if (currentNode.left) tempQueue.push(currentNode.left)
-        if (currentNode.right) tempQueue.push(currentNode.right)
+        if (currentNode.left) tempQueue.push(currentNode.left);
+        if (currentNode.right) tempQueue.push(currentNode.right);
 
-        result.push(currentNode)
+        result.push(currentNode);
       }
     }
+    return result;
+  }
+
+  //Depth First Search
+  //RECURSIVE SOLUTION
+  dfsPreOrder() {
+    // debugger
+    let result = [];
+
+    function traverse(node) {
+      //DUE TO CLOSURE WE STILL HAVE ACCESS TO THE OUTER VARIABLE
+      result.push(node)
+
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right)
+    }
+
+    //invoke the helper function and traverse the entire tree from the root
+    traverse(this.root)
+
     return result
   }
 }
@@ -115,5 +135,8 @@ newTree.search(5)         //expect 1 node (5)
 newTree.search(0)         //expect false
 newTree.search(100)       //expect false
 
-console.log(newTree.breadthFirstSearch())
+// console.log(newTree.breadthFirstSearch())
 //expect [10, 5, 15, 2, 7, 11, 16]
+
+console.log(newTree.dfsPreOrder())
+//expect [10, 5, 2, 7, 15, 11, 16]
