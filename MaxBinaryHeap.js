@@ -51,7 +51,7 @@ class MaxBinaryHeap {
     //bubble the newRoot down to its correct position in the Max Binary Heap
     while (leftChild > newRoot || rightChild > newRoot) {
       //can't compare a node with undefined
-      if (leftChild > rightChild || rightChild !== undefined) {
+      if (leftChild > rightChild || rightChild === undefined) {
         this.values[leftChildIdx] = newRoot
         this.values[parentIdx] = leftChild
         parentIdx = leftChildIdx
@@ -64,6 +64,8 @@ class MaxBinaryHeap {
       rightChildIdx = parentIdx * 2 + 2;
       leftChild = this.values[leftChildIdx];
       rightChild = this.values[rightChildIdx];
+
+      if (leftChild === undefined && rightChild === undefined) break
     }
 
     return oldRoot
