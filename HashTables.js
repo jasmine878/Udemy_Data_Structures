@@ -140,6 +140,11 @@ class HashTable {
 
 }
 
+//BEST TIME COMPLEXITY WHEN THE HASH FUNCTION EVENLY DISTRIBUTES THE DATA
+//TIME COMPLEXITY:  (INSERTION) O(1)
+//TIME COMPLEXITY:  (DELETION) O(1)
+//TIME COMPLEXITY:  (ACCESS) O(1)
+
 let newHashTable = new HashTable()
 newHashTable.set("halloween", "candy")
 newHashTable.set("christmas", "presents");
