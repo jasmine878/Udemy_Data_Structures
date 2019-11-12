@@ -72,9 +72,17 @@ class HashTable {
   set(key, value) {
     const hashedKey = this._hash(key)
     // console.log(hashedKey)
+    let slot = this.keyMap[hashedKey]
 
-    if (this.keyMap[hashedKey]) this.keyMap[hashedKey].push([key, value])
-    else this.keyMap[hashedKey] = [[key, value]]
+    if (slot) {
+      for (let i = 0; i < slot.length; i++) {
+        const keyVal = slot[i]
+
+        //CANNOT SET DUPLICATE KEYS
+        if (keyVal[0] === key) return "Key is already in use"
+        else slot.push([key, value]);
+      }
+    } else this.keyMap[hashedKey] = [[key, value]]
 
     return this.keyMap
   }
@@ -93,6 +101,43 @@ class HashTable {
     }
   }
 
+  keys() {
+    let keysArr = []
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      const slot = this.keyMap[i]
+
+      if (slot) {
+        for (let j = 0; j < slot.length; j++) {
+          keysArr.push(slot[j][0])
+        }
+      }
+    }
+
+    return keysArr
+  }
+
+  values() {
+    let keysArr = []
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      const slot = this.keyMap[i]
+
+      if (slot) {
+        for (let j = 0; j < slot.length; j++) {
+          const value = slot[j][1]
+
+          //remove duplicates from valueArray
+          if (!keysArr.includes(value)) {
+            keysArr.push(value);
+          }
+        }
+      }
+    }
+
+    return keysArr
+  }
+
 }
 
 let newHashTable = new HashTable()
@@ -100,8 +145,17 @@ newHashTable.set("halloween", "candy")
 newHashTable.set("christmas", "presents");
 newHashTable.set("easter", "eggs");
 newHashTable.set("thanksgiving", "turkey");
+newHashTable.set("birthday", "presents")
+console.log(newHashTable.set("halloween", "costume"))
+//expect "Key is already in use"
 
 console.log(newHashTable.get("easter"))
 //expect "eggs"
 console.log(newHashTable.get("halloween"))
 //expect "candy"
+
+console.log(newHashTable.keys())
+//expect ["halloween", "christmas", "easter", "thanksgiving"]
+
+console.log(newHashTable.values())
+//expect ["candy", "presents", "eggs", "turkey"]
