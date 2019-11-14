@@ -308,3 +308,170 @@ anotherList.unshift(50)
 // console.log(anotherList)              //expect 4 nodes (50, 33, 22, 3)
 anotherList.reverse()
 console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
+
+
+//LINKED LIST CLASS WITH ARROWS IN THE OPPOSITE DIRECTION
+// class Node {
+//   constructor(val) {
+//     this.val = val
+//     this.next = null
+//   }
+// }
+
+// class SingleLinkedList {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//     this.length = 0;
+//   }
+
+//   push(val) {
+//     let newNode = new Node(val);
+
+//     if (this.head === null) {
+//       this.head = newNode;
+//     } else {
+//       newNode.next = this.tail;
+//     }
+//     this.tail = newNode;
+//     this.length++;
+
+//     return this;
+//   }
+
+//   pop() {
+//     if (this.length === 0) return undefined;
+
+//     let removed = this.tail;
+
+//     if (this.length === 1) {
+//       this.head = null;
+//       this.tail = null;
+//     } else {
+//       this.tail = removed.next;
+//       removed.next = null;
+//     }
+//     this.length--;
+
+//     return removed;
+//   }
+
+//   unshift(val) {
+//     let newNode = new Node(val);
+
+//     if (this.head === null) {
+//       this.head = newNode;
+//       this.tail = newNode;
+//     } else {
+//       this.head.next = newNode;
+//       this.head = newNode;
+//     }
+//     this.length++;
+
+//     return this;
+//   }
+
+//   shift() {
+//     if (this.length === 0) return undefined;
+
+//     let removed = this.head;
+//     let secondNode = null;
+
+//     if (this.length === 1) {
+//       this.head = null;
+//       this.tail = null;
+//     } else {
+//       let currentNode = this.tail;
+
+//       while (currentNode.next) {
+//         secondNode = currentNode;
+//         currentNode = currentNode.next;
+//       }
+//       secondNode.next = null;
+//       this.head = secondNode;
+//     }
+//     this.length--;
+
+//     return removed;
+//   }
+
+//   get(index) {
+//     if (index < 0 || index >= this.length) return null;
+
+//     let count = this.length - 1;
+//     let currentNode = this.tail;
+
+//     while (count > index) {
+//       count--;
+//       currentNode = currentNode.next;
+//     }
+
+//     return currentNode;
+//   }
+
+//   set (index, val) {
+//     if (index < 0 || index >= this.length) return null
+
+//     let foundNode = this.get(index)
+
+//     if (foundNode) {
+//       foundNode.val = val
+//       return true
+//     }
+
+//     return false
+//   }
+
+//   insert(index, val) {
+//     if (index < 0 || index > this.length) return false
+
+//     if (this.length === 0 || index === 0) {
+//       this.unshift(val)
+//     } else if (index === this.length) this.push(val)
+//     else {
+//       let newNode = new Node(val)
+//       let afterNode = this.get(index)
+//       let beforeNode = afterNode.next
+
+//       afterNode.next = newNode
+//       newNode.next = beforeNode
+//       this.length++;
+//     }
+
+//     return true
+//   }
+
+//   remove(index) {
+//     if (index < 0 || index >= this.length) return null
+
+//     if (index === 0) return this.shift()
+//     if (index === this.length - 1) return this.pop()
+
+//     let afterNode = this.get(index + 1)
+//     let removedNode = afterNode.next
+//     let beforeNode = afterNode.next.next
+
+//     afterNode.next = beforeNode
+//     this.length--;
+
+//     return removedNode
+//   }
+
+//   reverse() {
+//     if (this.length <= 1) return this
+
+//     let currentNode = this.tail
+//     let afterNode = null
+
+//     this.tail = this.head
+//     this.head = currentNode
+
+//     while (currentNode) {
+//       const beforeNode = currentNode.next
+
+//       currentNode.next = afterNode
+//       afterNode = currentNode
+//       currentNode = beforeNode
+//     }
+//   }
+// }
