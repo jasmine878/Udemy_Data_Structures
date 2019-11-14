@@ -300,7 +300,6 @@ class SingleLinkedList {
       //set the 2nd to last node as the new tail
       this.tail = previousNode;
       this.tail.next = null;
-
     }
     this.length--;
 
@@ -397,8 +396,8 @@ class SingleLinkedList {
   //a method that removes a node at a specific location in a linked list and returns the removed node
   remove(index) {
     if (index < 0 || index >= this.length) return null;
-    if (index === 0) return this.shift()
-    if (index === this.length - 1) return this.pop()
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
 
     let beforeNode = this.get(index - 1);
     let removedNode = beforeNode.next;
@@ -408,32 +407,55 @@ class SingleLinkedList {
     this.length--;
 
     return removedNode;
-
   }
 
-    //a method that reverses a linked list in place
-    reverse() {
-      let beforeNode = null;
-      let currentNode = this.head
-      //next of null will produce an error.
-      //we need to calculate 1 less of currentNode.next to prevent this.
-      let afterNode
+  //a method that reverses a linked list in place
+  // reverse() {
+  //   let beforeNode = null;
+  //   let currentNode = this.head;
+  //   //next of null will produce an error.
+  //   //we need to calculate 1 less of currentNode.next to prevent this.
+  //   let afterNode;
 
-      //swap the head and the tail
-      this.head = this.tail
-      this.tail = currentNode
+  //   //swap the head and the tail
+  //   this.head = this.tail;
+  //   this.tail = currentNode;
 
-      for (let i = 0; i < this.length; i++) {
-        afterNode = currentNode.next;
-        currentNode.next = beforeNode
+  //   for (let i = 0; i < this.length; i++) {
+  //     afterNode = currentNode.next;
+  //     currentNode.next = beforeNode;
 
-        beforeNode = currentNode
-        currentNode = afterNode
-      }
+  //     beforeNode = currentNode;
+  //     currentNode = afterNode;
+  //   }
 
-      return this
+  //   return this;
+  // }
+
+  reverse() {
+    // debugger
+    if (this.length <= 1) return this;
+
+    let currentNode = this.head;
+    let afterNode = null;
+
+    this.head = this.tail;
+    this.tail = currentNode;
+
+    while (currentNode) {
+      const beforeNode = currentNode.next;
+
+      currentNode.next = afterNode;
+      afterNode = currentNode;
+      currentNode = beforeNode;
     }
+
+    return this
+  }
 }
+
+//expect [1, 2, 3]                 head           a      c
+//                                 [1] -> [2] -> [3] ->  null
 
 //Time Complexity:  for insertion O(1)              vs. Arrays:  differnt O(n)
 //Time Complexity:  for removal from front O(1)     vs. Arrays:  different O(n)
@@ -449,58 +471,66 @@ let newList = new SingleLinkedList()
 newList.push(1)
 newList.push(2)
 newList.push(3)
-// console.log(newList)     //expect 3 nodes(1, 2, 3)
+newList.unshift(0)
+// console.log(newList)
+// expect [0, 1, 2, 3]              head                 tail
+//                                  [0] -> [1] -> [2] -> [3] -> null
 
-newList.pop()
-newList.pop();
-// console.log(newList);    //expect 1 node(1)
-newList.pop();
-// console.log(newList);    //expect 0 node
-newList.pop();
-// console.log(newList);    //expect undefined
+newList.reverse()
+console.log(newList);
+// expect [3, 2, 1, 0]              head                 tail
+//                                  [3] -> [2] -> [1] -> [0] -> null
 
-newList.unshift(4)
-// console.log(newList)        //expect 1 node (4)
-newList.unshift(5)
-// console.log(newList)        //expect 2 nodes(5, 4)
+// newList.pop()
+// newList.pop();
+// // console.log(newList);    //expect 1 node(3)
+// newList.pop();
+// // console.log(newList);    //expect 0 node
+// newList.pop();
+// // console.log(newList);    //expect undefined
 
-newList.shift()
-// console.log(newList);       //expect 1 node (4)
-newList.shift()
-// console.log(newList);       //expect 0 node
-newList.shift()
-// console.log(newList);       //expect undefined
+// newList.unshift(4)
+// // console.log(newList)        //expect 1 node (4)
+// newList.unshift(5)
+// // console.log(newList)        //expect 2 nodes(5, 4)
 
-let anotherList = new SingleLinkedList()
-anotherList.unshift(1)
-anotherList.unshift(2);
-anotherList.unshift(3);
-// console.log(anotherList)          //expect 3 nodes (3, 2, 1)
-anotherList.get(0);              //expect 1 node (val 3)
-anotherList.get(1);              //expect 1 node (val 2)
-anotherList.get(2);              //expect 1 node (val 1)
-anotherList.get(3);              //expect null
+// newList.shift()
+// // console.log(newList);       //expect 1 node (4)
+// newList.shift()
+// // console.log(newList);       //expect 0 node
+// newList.shift()
+// // console.log(newList);       //expect undefined
 
-anotherList.set(1, 22);
-// console.log(anotherList)         //expect 3 nodes (3, 22, 1)
+// let anotherList = new SingleLinkedList()
+// anotherList.unshift(1)
+// anotherList.unshift(2);
+// anotherList.unshift(3);
+// // console.log(anotherList)          //expect 3 nodes (3, 2, 1)
+// anotherList.get(0);              //expect 1 node (val 3)
+// anotherList.get(1);              //expect 1 node (val 2)
+// anotherList.get(2);              //expect 1 node (val 1)
+// anotherList.get(3);              //expect null
 
-anotherList.insert(2, 33)
-// console.log(anotherList)         //expect 4 nodes (3, 22, 33, 1)
-anotherList.insert(0, 13)
-// console.log(anotherList)         //expect 5 nodes (13, 3, 22, 33, 1)
-anotherList.insert(5, 111)
-// console.log(anotherList)         //expect 6 nodes (13, 3, 22, 33, 1, 111)
+// anotherList.set(1, 22);
+// // console.log(anotherList)         //expect 3 nodes (3, 22, 1)
 
-anotherList.remove(4)
-// console.log(anotherList)           //expect 5 nodes (13, 3, 22, 33, 111)
-anotherList.remove(0)
-// console.log(anotherList)           //expect 4 nodes (3, 22, 33, 111)
-anotherList.remove(3)
-// console.log(anotherList)           //expect 3 nodes (3, 22, 33)
+// anotherList.insert(2, 33)
+// // console.log(anotherList)         //expect 4 nodes (3, 22, 33, 1)
+// anotherList.insert(0, 13)
+// // console.log(anotherList)         //expect 5 nodes (13, 3, 22, 33, 1)
+// anotherList.insert(5, 111)
+// // console.log(anotherList)         //expect 6 nodes (13, 3, 22, 33, 1, 111)
 
-anotherList.reverse()
-// console.log(anotherList)              //expect 3 nodes (33, 22, 3)
-anotherList.unshift(50)
-// console.log(anotherList)              //expect 4 nodes (50, 33, 22, 3)
-anotherList.reverse()
-console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
+// anotherList.remove(4)
+// // console.log(anotherList)           //expect 5 nodes (13, 3, 22, 33, 111)
+// anotherList.remove(0)
+// // console.log(anotherList)           //expect 4 nodes (3, 22, 33, 111)
+// anotherList.remove(3)
+// // console.log(anotherList)           //expect 3 nodes (3, 22, 33)
+
+// anotherList.reverse()
+// // console.log(anotherList)              //expect 3 nodes (33, 22, 3)
+// anotherList.unshift(50)
+// // console.log(anotherList)              //expect 4 nodes (50, 33, 22, 3)
+// anotherList.reverse()
+// console.log(anotherList)              //expect 4 nodes (3, 22, 33, 50)
