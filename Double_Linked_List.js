@@ -122,25 +122,26 @@ class DoubleLinkedList {
   //by searcing from the tail if the index is greater than the middle node in the linked list
   //THIS IS DUE TO THE FACT THAT THE INDEX IS ALREADY SORTED OR IN ORDER!!
   get(index) {
-    // debugger
-    if (index < 0 || index >= this.length) {
-      return null;
-    }
-    let currentNode = this.head;
-    let counter = 0;
+    if (index < 0 || index >= this.length) return undefined;
+    let midIdx = this.length / 2;
+    let currentNode;
+    let currentIdx;
 
-    if (index > this.length / 2) {
-      currentNode = this.tail;
-      counter = this.length - 1;
+    if (index < midIdx) {
+      currentNode = this.head;
+      currentIdx = 0;
 
-      while (counter > index) {
-        currentNode = currentNode.previous;
-        counter--;
+      while (currentIdx < index) {
+        currentNode = currentNode.next;
+        currentIdx++;
       }
     } else {
-      while (counter < index) {
-        currentNode = currentNode.next;
-        counter++;
+      currentNode = this.tail;
+      currentIdx = this.length - 1;
+
+      while (currentIdx > index) {
+        currentNode = currentNode.previous;
+        currentIdx--;
       }
     }
 
@@ -221,24 +222,24 @@ class DoubleLinkedList {
   //   return this;
   // }
   reverse() {
-    let beforeNode = null
-    let currentNode = this.head
-    let afterNode
+    let beforeNode = null;
+    let currentNode = this.head;
+    let afterNode;
 
-    this.head = this.tail
-    this.tail = currentNode
+    this.head = this.tail;
+    this.tail = currentNode;
 
     for (let i = 0; i < this.length; i++) {
-      afterNode = currentNode.next
+      afterNode = currentNode.next;
 
-      currentNode.next = beforeNode
-      currentNode.prev = afterNode
+      currentNode.next = beforeNode;
+      currentNode.prev = afterNode;
 
-      beforeNode = currentNode
-      currentNode = afterNode
+      beforeNode = currentNode;
+      currentNode = afterNode;
     }
 
-    return this
+    return this;
   }
 }
 
