@@ -201,40 +201,20 @@ class DoubleLinkedList {
     return removedNode;
   }
 
-  // reverse() {
-  //   let beforeNode = null;
-  //   let currentNode = this.head;
-  //   let afterNode = currentNode.next;
-
-  //   this.head = this.tail
-  //   this.tail = currentNode
-
-  //   while (afterNode) {
-  //     currentNode.next = beforeNode;
-  //     currentNode.previous = afterNode;
-
-  //     beforeNode = currentNode;
-  //     currentNode = afterNode;
-  //     afterNode = afterNode.next;
-  //   }
-  //   currentNode.next = beforeNode;
-  //   currentNode.previous = afterNode;
-
-  //   return this;
-  // }
   reverse() {
+    if (this.length <= 1) return this;
+
     let beforeNode = null;
     let currentNode = this.head;
-    let afterNode;
 
     this.head = this.tail;
     this.tail = currentNode;
 
-    for (let i = 0; i < this.length; i++) {
-      afterNode = currentNode.next;
+    while (currentNode) {
+      let afterNode = currentNode.next;
 
       currentNode.next = beforeNode;
-      currentNode.prev = afterNode;
+      currentNode.previous = afterNode;
 
       beforeNode = currentNode;
       currentNode = afterNode;
@@ -242,6 +222,27 @@ class DoubleLinkedList {
 
     return this;
   }
+
+  // reverse() {
+  //   let beforeNode = null;
+  //   let currentNode = this.head;
+  //   let afterNode;
+
+  //   this.head = this.tail;
+  //   this.tail = currentNode;
+
+  //   for (let i = 0; i < this.length; i++) {
+  //     afterNode = currentNode.next;
+
+  //     currentNode.next = beforeNode;
+  //     currentNode.prev = afterNode;
+
+  //     beforeNode = currentNode;
+  //     currentNode = afterNode;
+  //   }
+
+  //   return this;
+  // }
 }
 
 //Time Complexity:  push, unshift - O(1)    vs. Single Linked List:  same
