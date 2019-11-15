@@ -160,6 +160,7 @@ class DoubleLinkedList {
     return false;
   }
 
+  //TRICKY
   //a method that inserts a node at a specific location in a linked list and returns true
   insert(index, val) {
     if (index < 0 || index > this.length) return false;
