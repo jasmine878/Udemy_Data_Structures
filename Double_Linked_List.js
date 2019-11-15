@@ -35,14 +35,11 @@ class DoubleLinkedList {
 
     if (this.head === null) {
       this.head = newNode;
-      this.tail = newNode;
     } else {
       newNode.previous = this.tail;
       this.tail.next = newNode;
-      //EITHER WAY WORKS!!
-      // newNode.previous = this.tail;
-      this.tail = newNode;
     }
+    this.tail = newNode;
     this.length++;
 
     return this;
