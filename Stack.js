@@ -1,4 +1,4 @@
-//creating a stack using an Array
+// creating a stack using an Array
 let stack = []
 
 //using unshift and shift methods - LIFO
@@ -27,6 +27,7 @@ stack.pop()
 //Time Complexity:  push and pop - O(1)
 //Time Complexity:  searching and accessing - O(n)
 //Space Complexity:  O(n)
+
 //first Node
 class Node {
   constructor(val) {
@@ -38,8 +39,8 @@ class Node {
 //similar to a Single Linked List
 class Stack {
   constructor() {
-    this.firstNode = null;
-    this.lastNode = null;
+    this.first = null;
+    this.last = null;
     this.size = 0;
   }
 
@@ -49,11 +50,11 @@ class Stack {
     let newNode = new Node(val);
 
     if (this.size === 0) {
-      this.lastNode = newNode;
+      this.last = newNode;
     } else {
-      newNode.next = this.firstNode;
+      newNode.next = this.first;
     }
-    this.firstNode = newNode;
+    this.first = newNode;
     this.size++;
 
     return this.size;
@@ -64,13 +65,13 @@ class Stack {
   // pop() {
   //   if (this.length === 0) return null
 
-  //   let removedNode = this.firstNode
+  //   let removedNode = this.first
 
   //   if (this.length === 1) {
-  //     this.firstNode === null
-  //     this.lastNode === null
+  //     this.first === null
+  //     this.last === null
   //   } else {
-  //     this.firstNode = removedNode.next;
+  //     this.first = removedNode.next;
   //   }
   //   this.length--
 
@@ -80,12 +81,13 @@ class Stack {
   pop() {
     if (this.size === 0) return null;
 
-    let removedNode = this.firstNode;
+    let removedNode = this.first;
 
     if (this.size === 1) {
-      this.lastNode = null;
+      this.last = null;
     }
-    this.firstNode = removedNode.next;
+    this.first = removedNode.next;
+    removedNode.next = null
     this.size--;
 
     return removedNode;
@@ -99,7 +101,7 @@ console.log(newStack.push(1))     //expect 3
 // console.log(newStack)             //expect 3 nodes (1, 2, 3)
 
 console.log(newStack.pop())    //expect 1
-// console.log(newStack)       //expect 2 nodes (2, 3)
+console.log(newStack)       //expect 2 nodes (2, 3)
 console.log(newStack.pop())    //expect 2
 // console.log(newStack)       //expect 1 node (3)
 console.log(newStack.pop())    //expect 3
