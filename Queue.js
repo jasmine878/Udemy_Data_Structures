@@ -39,8 +39,8 @@ class Node {
 //similar to a Single Linked List
 class Queue {
   constructor() {
-    this.firstNode = null;
-    this.lastNode = null;
+    this.first = null;
+    this.last = null;
     this.size = 0;
   }
 
@@ -49,11 +49,11 @@ class Queue {
   //   let newNode = new Node(val);
 
   //   if (this.length === 0) {
-  //     this.firstNode = newNode;
-  //     this.lastNode = newNode;
+  //     this.first = newNode;
+  //     this.last = newNode;
   //   } else {
-  //     newNode.next = this.lastNode;
-  //     this.lastNode = newNode;
+  //     newNode.next = this.last;
+  //     this.last = newNode;
   //   }
 
   //   this.size++;
@@ -73,11 +73,11 @@ class Queue {
     let newNode = new Node(val);
 
     if (this.size === 0) {
-      this.lastNode = newNode;
+      this.first = newNode;
     } else {
-      this.firstNode.next = newNode;
+      this.last.next = newNode;
     }
-    this.firstNode = newNode;
+    this.last = newNode;
     this.size++;
 
     return this.size;
@@ -86,64 +86,38 @@ class Queue {
   //a method that removes a node from the back of a queue
   //and returns value of the node removed
   dequeue() {
-    if (this.size === 0) return null;
+    if (this.size === 0) return undefined;
 
-    let removedNode = this.lastNode;
+    let removedNode = this.first;
 
     if (this.size === 1) {
-      this.firstNode = null;
-      this.lastNode = null;
+      this.first = null;
+      this.last = null;
     } else {
-      this.lastNode = removedNode.next;
+      this.first = removedNode.next;
+      removedNode.next = null
     }
 
     this.size--;
 
-    return removedNode.val;
+    return removedNode;
   }
-
-  //CAN ALSO FLIP IT
-  // enqueue(val) {
-  //   let newNode = new Node(val);
-
-  //   if (this.size === 0) {
-  //     this.firstNode = newNode;
-  //   } else {
-  //     this.lastNode.next = newNode;
-  //   }
-  //   this.lastNode = newNode;
-  //   this.size++;
-
-  //   return this.size;
-  // }
-
-  // //CAN ALSO FLIP IT
-  // dequeue() {
-  //   if (this.size === 0) return null;
-
-  //   let removedNode = this.lastNode;
-
-  //   if (this.size === 1) {
-  //     this.firstNode = null;
-  //     this.lastNode = null;
-  //   } else {
-  //     this.lastNode = removedNode.next;
-  //   }
-
-  //   this.size--;
-
-  //   return removedNode.val;
-  // }
 }
+
+//TIME COMPLEXITY:  INSERTION & REMOVAL - O(1)
+//SPACE COMPLEXITY: O(1)
 
 let newQueue = new Queue()
 console.log(newQueue.enqueue(1))           //expect 1
 console.log(newQueue.enqueue(2))           //expect 2
 console.log(newQueue.enqueue(3))           //expect 3
-console.log(newQueue)
-//expect [3, 2, 1] or [1, 2, 3]
+// console.log(newQueue)
+//expect [1, 2, 3]            first         last
+//                            [1] -> [2] -> [3]
 
 console.log(newQueue.dequeue())            //expect 1
+console.log(newQueue)
+//expect [2, 3]
 console.log(newQueue.dequeue())            //expect 2
 console.log(newQueue.dequeue())            //expect 3
 console.log(newQueue)                  //expect 0 nodes
