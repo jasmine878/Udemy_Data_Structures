@@ -67,7 +67,7 @@ class Queue {
   //   //NOT RECOMMENDED UNLESS DOUBLE LINKED LIST
   // }
 
-  //a method that adds a node to the front of a queue
+  //a method that adds a node to the back of a queue
   //and returns the size of the queue
   enqueue(val) {
     let newNode = new Node(val);
@@ -83,8 +83,8 @@ class Queue {
     return this.size;
   }
 
-  //a method that removes a node from the back of a queue
-  //and returns value of the node removed
+  //a method that removes a node from the front of a queue
+  //and returns the node that was removed
   dequeue() {
     if (this.size === 0) return undefined;
 
