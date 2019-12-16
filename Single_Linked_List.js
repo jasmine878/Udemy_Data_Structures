@@ -33,13 +33,11 @@ class SingleLinkedList {
     const newNode = new Node(val);
 
     //add 1st Node to Single Linked List
-    if (this.head === null) {
-      this.head = newNode;
+    if (this.head === null) this.head = newNode;
 
       //add additional nodes to Single Linked List
-    } else {
-      this.tail.next = newNode;
-    }
+    else this.tail.next = newNode;
+
     this.tail = newNode;
     this.length++;
 
