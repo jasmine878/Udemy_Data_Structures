@@ -40,7 +40,6 @@ class SingleLinkedList {
 
     this.tail = newNode;
     this.length++;
-
     return this;
   }
 
@@ -118,9 +117,8 @@ class SingleLinkedList {
 
   //a method that gets a node at a specific location in a linked list
   get(index) {
-    if (index < 0 || index >= this.length) {
-      return null;
-    }
+    if (index < 0 || index >= this.length) return null;
+
     let currentNode = this.head;
     let counter = 0;
 
