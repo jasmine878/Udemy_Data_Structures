@@ -153,7 +153,8 @@ class SingleLinkedList {
 
     //unshift and push already increments 1 to length property
     if (index === 0) this.unshift(val);
-    else if (index === this.length) this.push(val);
+    //THE PUSH METHOD IS NOT NECESSARY.  IT STILL WORKS
+    // else if (index === this.length) this.push(val);
     else {
       let beforeNode = this.get(index - 1);
       let newNode = new Node(val);
