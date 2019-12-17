@@ -43,21 +43,15 @@ class BinarySearchTree {
 
   //similar to insert method
   search(val) {
-    let currentNode = this.root;
+    let currentNode = this.root
 
-    if (currentNode === null) return null;
-
-    while (true) {
-      if (currentNode.val === val) return currentNode;
-      if (currentNode.val > val) {
-        if (currentNode.left === null) return false;
-        else currentNode = currentNode.left;
-      }
-      if (currentNode.val < val) {
-        if (currentNode.right === null) return false;
-        else currentNode = currentNode.right;
-      }
+    while(currentNode) {
+      if (val === currentNode.val) return true
+      else if (val < currentNode.val) currentNode = currentNode.left
+      else if (val > currentNode.val) currentNode = currentNode.right
     }
+
+    return false
   }
 
   //ITERATIVE SOLUTION
@@ -120,7 +114,7 @@ class BinarySearchTree {
   }
 
   dfsInOrder() {
-    debugger
+    // debugger
     let result = []
 
     function traverse(node) {
@@ -162,10 +156,10 @@ newTree.insert(7)
 newTree.insert(11)
 newTree.insert(16)
 
-newTree.search(11)        //expect 1 node (11)
-newTree.search(5)         //expect 1 node (5)
-newTree.search(0)         //expect false
-newTree.search(100)       //expect false
+console.log(newTree.search(11))        //expect true
+console.log(newTree.search(5))         //expect true
+console.log(newTree.search(0))         //expect false
+console.log(newTree.search(100))       //expect false
 
 // console.log(newTree.breadthFirstSearch())
 //expect [10, 5, 15, 2, 7, 11, 16]
