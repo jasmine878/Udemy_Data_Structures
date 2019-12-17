@@ -46,7 +46,7 @@ class BinarySearchTree {
     let currentNode = this.root
 
     while(currentNode) {
-      if (val === currentNode.val) return true
+      if (val === currentNode.val) return currentNode
       else if (val < currentNode.val) currentNode = currentNode.left
       else if (val > currentNode.val) currentNode = currentNode.right
     }
@@ -156,8 +156,8 @@ newTree.insert(7)
 newTree.insert(11)
 newTree.insert(16)
 
-console.log(newTree.search(11))        //expect true
-console.log(newTree.search(5))         //expect true
+console.log(newTree.search(11))        //expect [11]
+console.log(newTree.search(5))         //expect [5]
 console.log(newTree.search(0))         //expect false
 console.log(newTree.search(100))       //expect false
 
