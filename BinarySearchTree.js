@@ -32,7 +32,7 @@ class BinarySearchTree {
           return this;
         } else currentNode = currentNode.left;
       }
-      if (currentNode.val < val) {
+      else if (currentNode.val < val) {
         if (currentNode.right === null) {
           currentNode.right = newNode;
           return this;
@@ -156,10 +156,10 @@ newTree.insert(7)
 newTree.insert(11)
 newTree.insert(16)
 
-console.log(newTree.search(11))        //expect [11]
-console.log(newTree.search(5))         //expect [5]
+// console.log(newTree.search(11))        //expect [11]
+// console.log(newTree.search(5))         //expect [5]
 console.log(newTree.search(0))         //expect false
-console.log(newTree.search(100))       //expect false
+// console.log(newTree.search(100))       //expect false
 
 // console.log(newTree.breadthFirstSearch())
 //expect [10, 5, 15, 2, 7, 11, 16]
@@ -170,5 +170,5 @@ console.log(newTree.search(100))       //expect false
 // console.log(newTree.dfsPostOrder())
 //expect [2, 7, 5, 11, 16, 15, 10]
 
-console.log(newTree.dfsInOrder())
+// console.log(newTree.dfsInOrder())
 //expect [2, 5, 7, 10, 11, 15, 16]
